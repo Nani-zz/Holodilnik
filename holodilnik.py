@@ -87,7 +87,6 @@ def find(items, needle):
             result.append(title)
     return result
 
-
 def amount(items, needle):
     """
 
