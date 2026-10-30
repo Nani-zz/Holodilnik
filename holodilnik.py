@@ -63,6 +63,31 @@ def add_by_note(items, note):
         title = ' '.join(parts[:-1])
     add(items, title, amount, expiration_date)
 
+def find_beautiful(items, needle):
+    """
+
+    Возвращает список названий продуктов, содержащих исходную строку.
+
+    Args:
+        items (dict): Словарь, который хранит список продуктов
+        needle (str): Строка, по которой осуществляется поиск
+                        без учета регистра
+
+    Returns:
+        Функция возвращает список с названиями продуктов,
+        которые содержат искомую строку
+
+    Raises:
+        ValueError: Если введены данные не правильного формата
+    """
+    result = 'Мы нашли такие то продукты: '
+    netu = 'Мы не нашли таких продуктов('
+    for title in items:
+        if needle.lower() in title.lower():
+            result += str(title) + ', '
+    if result == 'Мы нашли такие то продукты: ':
+        return netu
+    return result[0 : -2]
 
 def find(items, needle):
     """
@@ -123,10 +148,16 @@ print(fridge)
 add_by_note(fridge, 'Яйца страуса 4 15-07-2026')
 add_by_note(fridge, 'Хлеб белый 1')               # без даты
 add_by_note(fridge, 'Яйца 2 01-11-2026')          # уже есть в словаре
-add_by_note(fridge, 'Пельмени с рыбой 2 15-9-2026')
+add_by_note(fridge, 'Пельмени с рыбой 2 5-9-2026')
 add_by_note(fridge, 'Пельмени с рыбой 0.5 1-10-2026')
 add_by_note(fridge, 'Вода 1.5')
 print(fridge)
+
+
+print(find_beautiful(fridge, 'йц'))      # ['Яйца', 'Яйца страуса']
+print(find_beautiful(fridge, 'ХЛЕБ'))    # ['Хлеб белый']
+print(find_beautiful(fridge, 'молоко'))
+
 
 print(find(fridge, 'йц'))      # ['Яйца', 'Яйца страуса']
 print(find(fridge, 'ХЛЕБ'))    # ['Хлеб белый']
