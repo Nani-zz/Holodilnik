@@ -1,7 +1,7 @@
 import datetime
-from decimal import Decimal
+from decimal import Decimal # для перевода строки в число
 
-DATE_FORMAT = '%Y-%m-%d'
+DATE_FORMAT = '%d-%m-%Y'
 
 # Холодильник пуст
 goods = {}
@@ -114,17 +114,17 @@ def amount(items, needle):
 # Тесты
 fridge = {}
 
-add(fridge, 'Яйца', Decimal('10'), '2023-9-30')
-add(fridge, 'Яйца', Decimal('3'), '2023-10-15')   # вторая партия
-add(fridge, 'Вода', Decimal('2.5'))               # без срока годности
-add(fridge, 'Сыр', Decimal('0.3'), '2123-01-01')  # через сто лет
+add(fridge, 'Яйца', Decimal('10'), '30-9-2026')
+add(fridge, 'Яйца', Decimal('3'), '15-10-2026')   # вторая партия
+add(fridge, 'Вода', Decimal('2.5'))                             # без срока годности
+add(fridge, 'Сыр', Decimal('0.3'), '01-01-2126')   # через сто лет
 print(fridge)
 
-add_by_note(fridge, 'Яйца страуса 4 2023-07-15')
-add_by_note(fridge, 'Хлеб белый 1')         # без даты
-add_by_note(fridge, 'Яйца 2 2023-11-01')          # уже есть в словаре
-add_by_note(fridge, 'Пельмени с рыбой 2 2023-9-15')
-add_by_note(fridge, 'Пельмени с рыбой 0.5 2023-10-1')
+add_by_note(fridge, 'Яйца страуса 4 15-07-2026')
+add_by_note(fridge, 'Хлеб белый 1')               # без даты
+add_by_note(fridge, 'Яйца 2 01-11-2026')          # уже есть в словаре
+add_by_note(fridge, 'Пельмени с рыбой 2 15-9-2026')
+add_by_note(fridge, 'Пельмени с рыбой 0.5 1-10-2026')
 add_by_note(fridge, 'Вода 1.5')
 print(fridge)
 
@@ -132,6 +132,6 @@ print(find(fridge, 'йц'))      # ['Яйца', 'Яйца страуса']
 print(find(fridge, 'ХЛЕБ'))    # ['Хлеб белый']
 print(find(fridge, 'молоко'))  # []
 
-print(amount(fridge, 'яйца'))  # 10 + 3 + 2 + 4 = 19
-print(amount(fridge, 'вода'))  # 4
+print(amount(fridge, 'яйца'))    # 10 + 3 + 2 + 4 = 19
+print(amount(fridge, 'вода'))    # 4
 print(amount(fridge, 'молоко'))  # 0
